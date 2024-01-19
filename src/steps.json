@@ -1,0 +1,88 @@
+[
+    {
+        "id": "1",
+        "message": "Welcome! Here is a list of bills you can pay:",
+        "trigger": "2"
+    },
+    {
+        "id": "2",
+        "options": [
+            {
+                "value": "electricity",
+                "label": "Electricity Bill",
+                "trigger": "requestBillId"
+            },
+            {
+                "value": "water",
+                "label": "Water Bill",
+                "trigger": "requestBillId"
+            },
+            {
+                "value": "exit",
+                "label": "Exit",
+                "trigger": "endMessage"
+            }
+        ]
+    },
+    {
+        "id": "requestBillId",
+        "message": "Please enter your Consumer ID:",
+        "trigger": "getBillId"
+    },
+    {
+        "id": "getBillId",
+        "user": true,
+        "trigger": "fetchBillData"
+    },
+    {
+        "id": "fetchBillData",
+        "component": true,
+        "waitAction": true,
+        "trigger": "showBillDetails"
+    },
+    {
+        "id": "showBillDetails",
+        "message": "Do you want to pay this bill?",
+        "trigger": "payOrNot"
+    },
+    {
+        "id": "payOrNot",
+        "options": [
+            {
+                "value": "pay",
+                "label": "Yes, I want to pay",
+                "trigger": "redirectToPayment"
+            },
+            {
+                "value": "noPay",
+                "label": "No, I do not want to pay",
+                "trigger": "otherBills"
+            }
+        ]
+    },
+    {
+        "id": "redirectToPayment",
+        "message": "Redirecting to payment gateway...",
+        "end": true
+    },
+    {
+        "id": "otherBills",
+        "options": [
+            {
+                "value": "yes",
+                "label": "Yes, show other bills",
+                "trigger": "2"
+            },
+            {
+                "value": "no",
+                "label": "No, thank you",
+                "trigger": "endMessage"
+            }
+        ]
+    },
+    {
+        "id": "endMessage",
+        "message": "Thank you for using our service!",
+        "end": true
+    }
+]
